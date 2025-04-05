@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
 )
 
 // stockage des todo
@@ -24,6 +25,27 @@ func GetTodos(c *gin.Context) {
 }
 
 // 3 - Creation d'une todo => POST
+func CreateTodo(c *gin.Context) {
+	// on veux creer une nouvelle todo
+	// on lui ajoute en type notre struct Todo
+	var newTodo models.Todo
+
+	// on verifie que la conversion est reussie
+	if err := c.ShouldBindBodyWithJSON(&newTodo); err != nil {
+		// si j'ai une erreur, je viens generer un code erreur
+		c.JSON(http.StatusBadRequest, gin.H{"Erreur": err})
+		// je return pour stoper la requete
+		return
+	}
+
+	// si la conversion a reussis alors je continue la creation d'un todo
+	// je creer un nouvel ID pour ma todo
+	newTodo.ID = uuid.New().String()
+	// j'ajoute ensuite dans le todo
+	todos = append(todos, newTodo)
+	// on retourne la todo creer avec un code 201
+	c.JSON(http.StatusCreated, newTodo)
+}
 
 // 4 - Modifier une todo => PUT
 

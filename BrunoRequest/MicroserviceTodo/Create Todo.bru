@@ -1,0 +1,17 @@
+meta {
+  name: Create Todo
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:8080/todos
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "titlle": "Ma super todo"
+  }
+}

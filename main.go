@@ -12,7 +12,9 @@ func main() {
 
 	// definition des routes pour chaque action
 	// route affichage des todo
-	r.GET("/todo", services.GetTodos)
+	r.GET("/todos", services.GetTodos)
+	// route pour la creation de todo
+	r.POST("/todos", services.CreateTodo)
 
 	// lancement du serveur
 	r.Run(":8080")
