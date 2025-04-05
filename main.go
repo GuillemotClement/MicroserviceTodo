@@ -10,6 +10,12 @@ func main() {
 	// creation du serveur Gin
 	r := gin.Default()
 
+	// definition du dossier static
+	r.Static("/static/", "./frontend")
+
+	// ajout de la route pour rendre le frontend
+	r.GET("/", services.HandleStatic)
+
 	// definition des routes pour chaque action
 	// route affichage des todo
 	r.GET("/todos", services.GetTodos)

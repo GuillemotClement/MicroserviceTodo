@@ -14,6 +14,10 @@ import (
 var todos = []models.Todo{}
 
 // 1 - Generation d'un statique => GET
+func HandleStatic(c *gin.Context) {
+	// on lui passe le path vers le fichier statique
+	c.File("./frontend/index.html")
+}
 
 // 2 - Montrer les todo => GET
 func GetTodos(c *gin.Context) {
