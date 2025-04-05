@@ -70,3 +70,17 @@ func ToggleTodo(c *gin.Context) {
 }
 
 // 5 - Supprimer une todo => DELETE
+func DeleteTodo(c *gin.Context) {
+	// on recupere l'id de la todo
+	id := c.Param("ID")
+	// on viens iterer sur la liste pour trouver la bonne todo
+	for i, todo := range todos {
+		if todo.ID == id {
+			// on recupere la bonne todo et on la supprime
+			todos = append(todos[:i], todos[i+1:]...)
+			c.JSON(http.StatusOK, gin.H{"Succes": "Todo supprimer"})
+			return
+		}
+	}
+	c.JSON(http.StatusNotFound, gin.H{"Erreur": "Todo not found"})
+}

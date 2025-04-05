@@ -17,6 +17,8 @@ func main() {
 	r.POST("/todos", services.CreateTodo)
 	// route pour update Done
 	r.PUT("/todos/:ID", services.ToggleTodo)
+	// route pour la supresion
+	r.DELETE("/todos/:ID", services.DeleteTodo)
 
 	// lancement du serveur
 	r.Run(":8080")
