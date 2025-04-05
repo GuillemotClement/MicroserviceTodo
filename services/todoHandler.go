@@ -48,5 +48,25 @@ func CreateTodo(c *gin.Context) {
 }
 
 // 4 - Modifier une todo => PUT
+// on souhaite venir modifier le status de la task
+func ToggleTodo(c *gin.Context) {
+	// on recupere l'id depuis le parametre passer via url
+	id := c.Param("ID")
+	// on viens iterer sur les todo pour trouver celle qui correspond a l'id
+	// todo correspond a la todo iterer
+	for i, todo := range todos {
+		// si id de la todo iterer correspond a id recup depuis la requete
+		if todo.ID == id {
+			// on viens modifier la todo present dans la liste
+			// on viens echanger la valeur de Done pour indiquer que la tache est finis ou non
+			todos[i].Done = !todos[i].Done
+			// on retourne la tache modifier et le code 200
+			c.JSON(http.StatusOK, todos[i])
+			return
+		}
+	}
+	// si la todo n'est pas trouver on retourne un message d'erreur
+	c.JSON(http.StatusNotFound, gin.H{"Erreur": "Todo not find"})
+}
 
 // 5 - Supprimer une todo => DELETE

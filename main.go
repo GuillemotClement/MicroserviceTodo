@@ -15,6 +15,8 @@ func main() {
 	r.GET("/todos", services.GetTodos)
 	// route pour la creation de todo
 	r.POST("/todos", services.CreateTodo)
+	// route pour update Done
+	r.PUT("/todos/:ID", services.ToggleTodo)
 
 	// lancement du serveur
 	r.Run(":8080")
